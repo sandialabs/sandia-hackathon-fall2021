@@ -2,23 +2,21 @@ swagger: "2.0"
 info:
   description: "Sample API calls for App-a-thon 2021: Fitness App edition. These are the calls that should be made to interact with the backend."
   version: "1.0.0"
-  title: "Swagger Petstore"
+  title: "Norfolk 2021: Fitness App"
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: "apiteam@swagger.io"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-basePath: "/v2"
+host: "127.0.0.1:5000"
+basePath: "/api/v1"
 tags:
-- name: "exercise"
+- name: "exercises"
   description: "Choose (or add) activities to do!"
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
 - name: "user"
   description: "Operations about user"
   externalDocs:
@@ -28,10 +26,31 @@ schemes:
 - "https"
 - "http"
 paths:
-  /exercise:
+  /exercises:
+    get:
+      tags:
+      - "exercises"
+      summary: "Find all exercises"
+      description: "Returns a single exercise"
+      operationId: "getAllExercises"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation will return an array"
+          schema:
+            type: "array"
+            items: 
+              $ref: "#/definitions/Exercise"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Exercise not found"
+      security:
+      - api_key: []
     post:
       tags:
-      - "exercise"
+      - "exercises"
       summary: "Add a new exercise to the app"
       description: ""
       operationId: "addExercise"
@@ -53,38 +72,10 @@ paths:
       - exercise_auth:
         - "write:exercise"
         - "read:exercise"
-    put:
-      tags:
-      - "exercise"
-      summary: "Update an existing exercise"
-      description: ""
-      operationId: "updateExercise"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Exercise object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Exercise"
-      responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Exercise not found"
-        "405":
-          description: "Validation exception"
-      security:
-      - exercise_auth:
-        - "write:exercise"
-        - "read:exercise"
-  /exercise/{id}:
+  /exercises/{id}:
     get:
       tags:
-      - "exercise"
+      - "exercises"
       summary: "Find an exercise by ID"
       description: "Returns a single exercise"
       operationId: "getExerciseById"
@@ -108,9 +99,43 @@ paths:
           description: "Exercise not found"
       security:
       - api_key: []
+    put:
+      tags:
+      - "exercises"
+      summary: "Update an existing exercise"
+      description: ""
+      operationId: "updateExercise"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of exercise to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Exercise object that needs to be updated in the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Exercise"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Exercise not found"
+        "405":
+          description: "Validation exception"
+      security:
+      - exercise_auth:
+        - "write:exercise"
+        - "read:exercise"
     delete:
       tags:
-      - "exercise"
+      - "exercises"
       summary: "Deletes an exercise"
       description: ""
       operationId: "deleteExercise"
@@ -137,6 +162,27 @@ paths:
         - "write:exercise"
         - "read:exercise"
   /workout:
+    get:
+      tags:
+      - "workout"
+      summary: "Get all workouts currently saved in the system"
+      description: ""
+      operationId: "getAllWorkouts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+          "200":
+            description: "successful operation will return an array"
+            schema:
+              type: "array"
+              items: 
+                $ref: "#/definitions/Workout"
+          "404":
+            description: "Workouts not found"
+      security:
+        - api_key: []
     post:
       tags:
       - "workout"
@@ -157,34 +203,6 @@ paths:
       responses:
         "405":
           description: "Invalid input"
-      security:
-      - workout_auth:
-        - "write:workout"
-        - "read:workout"
-    put:
-      tags:
-      - "workout"
-      summary: "Update an existing workout"
-      description: ""
-      operationId: "updateWorkout"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Workout object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Workout"
-      responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Workout not found"
-        "405":
-          description: "Validation exception"
       security:
       - workout_auth:
         - "write:workout"
@@ -216,6 +234,40 @@ paths:
           description: "Workout not found"
       security:
       - api_key: []
+    put:
+      tags:
+      - "workout"
+      summary: "Update an existing workout"
+      description: ""
+      operationId: "updateWorkout"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of workout to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Workout object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Workout"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Workout not found"
+        "405":
+          description: "Validation exception"
+      security:
+      - workout_auth:
+        - "write:workout"
+        - "read:workout"
     delete:
       tags:
       - "workout"
@@ -240,6 +292,35 @@ paths:
           description: "Invalid ID supplied"
         "404":
           description: "Pet not found"
+      security:
+      - workout_auth:
+        - "write:workout"
+        - "read:workout"
+  /workout/owner/{id}:
+    get:
+      tags:
+      - "workout"
+      summary: "Update an existing workout"
+      description: ""
+      operationId: "getWorkoutsByOwnerId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The ID of who created the workout"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Workouts not found"
+        "405":
+          description: "Validation exception"
       security:
       - workout_auth:
         - "write:workout"
@@ -385,7 +466,7 @@ paths:
     get:
       tags:
       - "ExerciseWorkoutLink"
-      summary: "Find exercises by workout id"
+      summary: "Find exercise goals by workout id"
       description: "Returns a list of exercises for the given workout"
       operationId: "getExerciseByWorkoutId"
       produces:
@@ -439,34 +520,22 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
         required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
+        schema:
+          $ref: "#/definitions/LoginPayload"
       responses:
         "200":
           description: "successful operation"
           schema:
             type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
         "400":
           description: "Invalid username/password supplied"
   /user/logout:
     get:
+      deprecated: true
       tags:
       - "user"
       summary: "Logs out current logged in user session"
@@ -615,11 +684,14 @@ definitions:
     type: "object"
     required:
     - "nickname"
+    - "ownerId"
     properties:
       id:
         type: "integer"
         format: "int64"
       nickname:
+        type: "string"
+      ownerId:
         type: "string"
     xml:
       name: "Workout"
@@ -631,7 +703,7 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      exercise_id:
+      linkId:
         type: "integer"
         format: "int64"  
       num_sets:
@@ -686,15 +758,15 @@ definitions:
         description: "active, inactive, disabled"
     xml:
       name: "User"
-  ApiResponse:
+  LoginPayload:
     type: "object"
+    required:
+    - "username"
+    - "password"
     properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
+      username:
         type: "string"
-      message:
+      password:
         type: "string"
 externalDocs:
   description: "Find out more about Swagger"
