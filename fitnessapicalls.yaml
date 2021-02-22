@@ -14,14 +14,14 @@ basePath: "/api/v1"
 tags:
 - name: "exercises"
   description: "Choose (or add) activities to do!"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
 - name: "user"
   description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
+- name: "workout"
+  description: "Set up your workouts"
+- name: "goal"
+  description: "Set some goals to accomplish!"
+- name: "ExerciseWorkoutLink"
+  description: "confusion junction is what we should have called it"
 schemes:
 - "https"
 - "http"
@@ -433,6 +433,40 @@ paths:
       - goal_auth:
         - "write:goal"
         - "read:goal"
+  /goal/user/{id}:
+    get:
+      tags:
+      - "goal"
+      summary: "Get all goals created by current user"
+      description: "Returns a list of all goals created by the current user"
+      operationId: "getAllGoalsForCurrentUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The ID of who created the workout"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation will return an array"
+          schema:
+            type: "array"
+            items: 
+              $ref: "#/definitions/Goal"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Workouts not found"
+        "405":
+          description: "Validation exception"
+      security:
+        - api_key: []
+
   /link/exercise/{id}:
     get:
       tags:
@@ -455,7 +489,7 @@ paths:
           schema:
             type: "array"
             items: 
-              $ref: "#/definitions/ExerciseWorkoutLink"
+              $ref: "#/definitions/Goal"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -466,8 +500,8 @@ paths:
     get:
       tags:
       - "ExerciseWorkoutLink"
-      summary: "Find exercise goals by workout id"
-      description: "Returns a list of exercises for the given workout"
+      summary: "Find all goals by workout id"
+      description: "Returns a list of goals for the given workout"
       operationId: "getExerciseByWorkoutId"
       produces:
       - "application/json"
@@ -484,7 +518,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/ExerciseWorkoutLink"
+              $ref: "#/definitions/Goal"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -698,12 +732,16 @@ definitions:
   Goal:
     type: "object"
     required:
-    - "exercise_id"
+    - "linkId"
+    - "ownerId"
     properties:
       id:
         type: "integer"
         format: "int64"
       linkId:
+        type: "integer"
+        format: "int64" 
+      ownerId:
         type: "integer"
         format: "int64"  
       num_sets:
@@ -725,10 +763,10 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      exercise_id:
+      exerciseId:
         type: "integer"
         format: "int64"  
-      workout_id:
+      workoutId:
         type: "integer"
         format: "int64"
     xml:
@@ -758,6 +796,36 @@ definitions:
         description: "active, inactive, disabled"
     xml:
       name: "User"
+  GoalPayload:
+    type: "object"
+    required:
+      - "exerciseId"
+      - "workoutId"
+      - "ownerId"
+    properties:
+      exerciseId:
+        type: "integer"
+        format: "int64"  
+      workoutId:
+        type: "integer"
+        format: "int64"
+      ownerId:
+        type: "integer"
+        format: "int64"  
+      num_sets:
+        type: "integer"
+        format: "int64"
+      num_reps:
+        type: "integer"
+        format: "int64"
+      duration:
+        type: "string"
+      weight:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "GoalPayload"
+  
   LoginPayload:
     type: "object"
     required:

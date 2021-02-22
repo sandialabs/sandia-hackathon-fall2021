@@ -67,6 +67,10 @@ workouts = [
     }
 ]
 
+goals = [ ]
+
+exercise_workout_link = [ ]
+
 # DEFAULT LANDING ZONE
 @app.route('/')
 def hello():
@@ -269,12 +273,82 @@ def delete_workout(workout_id):
 
 
 ## GOAL SECTION
+@app.route('/api/v1/goal/<int:owner_id>', methods=['GET'])
+def get_all_exercises(owner_id):
+    owned_goals = [g for g in goals if g[ownerId] == owner_id]
+    return jsonify({'goals':owned_goals})
 
+@app.route('/api/v1/goal', methods=['POST'])
+def add_goal():
+    if not 'exerciseId' in request.json and not 'workoutId' in request.json and not 'ownerId' in request.json:
+        abort(405)
+    
+    # to create a new goal, you need to create a new link first
+    # check exercise_id to see if it exists
+    # check workout_id to see if it exists
+    valid_exercise = [e for e in exercises if e['id'] == request.json['exerciseId']]
+    valid_workout = [w for w in workouts if w['id'] == request.json['workoutId']]
+
+    if (len(valid_exercise) == 0 or len(valid_workout) == 0):
+        abort(404)
+
+    new_link = {
+        'id': workouts[-1]['id']+1,
+        'exerciseId': request.json['exerciseId'],
+        'workoutId': request.json['workoutId']
+    }
+    exercise_workout_link.append(new_link)
+
+    new_goal = {
+        'id': workouts[-1]['id']+1,
+        'linkId': new_link['id'],
+        'ownerId': request.json['ownerId'],
+        'num_sets': request.json['num_sets'],
+        'num_reps': request.json['num_reps'],
+        'duration': request.json['duration'],
+        'weight': request.json['weight']
+    }
+    goals.append(new_goal)
+    return jsonify({'goal': new_goal}), 201
+
+
+@app.route('/api/v1/goal/<int:goal_id>', methods=['PUT'])
+def update_goal(goal_id):
+    if not request.json:
+        abort(400)
+    matched_goal = [g for g in goals if g['id'] == goal_id]
+    
+    if len(matched_goal) == 0:
+        abort(404)
+
+    # do we want to overwrite every time? currently we do not
+    matched_goal[0]['num_sets'] = request.json.get('num_sets', matched_goal[0]['num_sets'])
+    matched_goal[0]['num_reps'] = request.json.get('num_reps', matched_goal[0]['num_reps'])
+    matched_goal[0]['duration'] = request.json.get('duration', matched_goal[0]['duration'])
+    matched_goal[0]['weight'] = request.json.get('weight', matched_goal[0]['weight'])
+    return jsonify({'workout': matched_goal[0]}), 200
+
+
+@app.route('/api/v1/goal/<int:goal_id>', methods=['DELETE'])
+def delete_workout(goal_id):
+    found_goal = [g for g in goals if g['id'] == goal_id]
+    if len(found_goal) == 0:
+        abort(404)
+    delete_link = found_goal['linkId']
+    goals.remove(found_goal[0])
+    
+    # also need to delete the link between exercise and goal if
+    # the goal doesn't exist anymore
+    found_link = [l for l in exercise_workout_link if l['id'] == delete_link]
+    if len(found_link) == 0:
+        abort(404)
+    exercise_workout_link.remove(found_link[0])
+    return jsonify({'result': True})
 
 ## LINK SECTION
 @app.route('/api/v1/link/workout/<int:workout_id>', methods=['GET'])
-def get_goals_by_workout_id(workout_id):
-    # given a workout id, find all related exercises and goals
+def get_goals_for_workout_id(workout_id):
+    # given a workout id, find all related goals
     # first get the junction item
     junctions = [j for j in exercise_workout_link if j[workoutId] == workout_id]
     # then use the junctions to get the goals
@@ -283,12 +357,21 @@ def get_goals_by_workout_id(workout_id):
     related_goals = [g for g in goals if g[linkId] == junctions[0]]
     if len(related_goals) == 0:
         abort(404)
-    return jsonify({'exercises':exercises})
+    return jsonify({'goals': related_goals})
 
 
-@app.route('/api/v1/link/exercise', methods=['GET'])
-def get_all_workouts_by_exercise_id():
-    return jsonify({'exercises':exercises})
+@app.route('/api/v1/link/exercise/<int:exercise_id>', methods=['GET'])
+def get_all_goals_by_exercise_id():
+    # given an exercise id, find all related goals
+    # first lookup the junction item
+    junctions = [j for j in exercise_workout_link if j[exerciseId] == exercise_id]
+    # then use the junctions to get the goals
+    if len(junctions) == 0:
+        abort(400)
+    related_goals = [g for g in goals if g[linkId] == junctions[0]]
+    if len(related_goals) == 0:
+        abort(404)
+    return jsonify({'goals': related_goals})
 
 
 if __name__ == '__main__':
