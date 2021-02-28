@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![Alt text](/assets/login.png?raw=true "Login Page")
+![Alt text](./assets/login.png?raw=true "Login Page")
 
 ## Getting Started
 
