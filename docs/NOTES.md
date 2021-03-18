@@ -51,3 +51,9 @@ MEETING 1, Labor 3hrs total one per person
 [] need to send through R&A
 
 
+Prize Challenges 
+- bug bounty {2 pts each}
+- creatign secure login {5 pts}
+- added functionality {2 pts each}
+- Data visualization {2 pts}
+- building tests casses (pytests){1 pt each}
