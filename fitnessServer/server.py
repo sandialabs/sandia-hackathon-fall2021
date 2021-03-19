@@ -377,3 +377,5 @@ def get_all_goals_by_exercise_id():
 if __name__ == '__main__':
     app.run(debug=True)
 
+
+
