@@ -1,5 +1,5 @@
 
-from ..models.test import exercises
+from ..models.test import exercises, category
 
 from flask import Blueprint, jsonify, make_response, abort ,request
 from flask import current_app as app
@@ -55,6 +55,15 @@ def delete_exercise(id):
 @exercises_bp.route('/', methods=['GET'])
 def get_all_exercises():
     return jsonify({'exercises':exercises})
+
+@exercises_bp.route('/category', methods=['GET'])
+def get_all_exercises_by_category():
+    ## return a dictionary of exercises grouped by category
+    exercises_by_category_payload = {}
+    for c in category:
+        exercises = [e for e in exercises if e['category'] == c]
+        exercises_by_category_payload[c] = sorted(exercises, key= lambda e: e['name'])
+    return jsonify({'exercises_by_category': exercises_by_category_payload})
 
 @exercises_bp.route('/link', methods=['GET'])
 def get_all_workouts_by_exercise_id():

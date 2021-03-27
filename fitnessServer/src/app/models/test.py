@@ -1,4 +1,6 @@
 ## STATIC DATA HERE UNTIL DATABASE IS ESTABLISHED
+category = ['strength', 'endurance', 'flexibility', 'balance']
+
 exercises = [ 
     {
         'id': 1,
@@ -6,7 +8,7 @@ exercises = [
         'description': 'Freeweights for arm workouts',
         'impact': 'low',
         'intensity': 'high',
-        'category': 'muscles'
+        'category': 'strength'
     }, 
     {
         'id': 2,
@@ -14,7 +16,7 @@ exercises = [
         'description': 'That thing that makes your lungs hurt',
         'impact': 'medium',
         'intensity': 'high',
-        'category': 'cardio'
+        'category': 'endurance'
     }, 
     {
         'id': 3,
@@ -22,7 +24,7 @@ exercises = [
         'description': 'Slow breathing, long stretches',
         'impact': 'low',
         'intensity': 'low',
-        'category': 'stretch'
+        'category': 'flexibility'
     }
 ]
 
@@ -57,5 +59,31 @@ workouts = [
         "id": 2,
         "nickname": "Monday Cardio",
         "ownerId": 2
+    }, 
+    {
+        "id": 3,
+        "nickname": "Around the World Muscles",
+        "ownerId": 1
     }
 ]
+
+goals = [
+    {
+        "duration": -1,
+        "id": 1,
+        "linkId": 0,
+        "num_reps": 10,
+        "num_sets": 5,
+        "ownerId": 2,
+        "weight": 25
+    },
+    {
+        "duration": 45,
+        "id": 2,
+        "linkId": 1,
+        "num_reps": -1,
+        "num_sets": -1,
+        "ownerId": 2,
+        "weight": -1
+    }
+ ]
