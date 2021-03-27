@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'signup.dart';
-import 'nextscreen.dart';
+import 'exercises.dart';
 import 'dart:developer';
 
 class MyHomePage extends StatefulWidget {
@@ -120,7 +120,7 @@ getLogin(BuildContext context) async {
     'username': emailController.text,
     'password': passwordController.text,
   };
-  final Uri url = Uri.http("10.0.2.2:5000", "/api/v1/user/login");
+  final Uri url = Uri.http("10.0.2.2:6001", "/api/v1/user/login");
   log(url.toString());
   http
       .post(url,
@@ -135,7 +135,7 @@ getLogin(BuildContext context) async {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return NextScreen();
+              return Exercises();
             },
           ),
         );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:developer';
-import 'nextscreen.dart';
 import 'dart:convert';
 import 'login.dart';
 
@@ -148,7 +147,7 @@ getSignup(BuildContext context) async {
     'lastName': lastNameController.text,
     'username': usernameController.text
   };
-  final Uri url = Uri.http("10.0.2.2:5000", "/api/v1/user");
+  final Uri url = Uri.http("10.0.2.2:6001", "/api/v1/user");
   log(url.toString());
   http
       .post(url,
