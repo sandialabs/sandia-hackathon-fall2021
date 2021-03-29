@@ -1,5 +1,5 @@
 
-from ..models.test import exercises
+from ..models.test import exercises, category
 
 from flask import Blueprint, jsonify, make_response, abort ,request
 from flask import current_app as app
@@ -7,9 +7,14 @@ from flask import current_app as app
 
 exercises_bp = Blueprint('exercises', __name__, url_prefix='/api/v1/exercises')
 
+def validateCategory(checkValue):
+    if checkValue in category:
+        return True
+    return False
+
 @exercises_bp.route('/', methods=['POST'])
 def add_exercise():
-    if not request.json or not 'name' in request.json:
+    if not request.json or not 'name' in request.json or not validateCategory(request.json['category']):
         abort(405)
     new_exercise = {
         'id': exercises[-1]['id']+1,
@@ -17,7 +22,7 @@ def add_exercise():
         'description': request.json.get('description',""),
         'impact': request.json.get('impact',""),
         'intensity': request.json.get('intensity',""),
-        'category': request.json.get('category', "")
+        'category': request.json['category']
     }
     exercises.append(new_exercise)
     return jsonify({'exercise': new_exercise}), 201
@@ -27,7 +32,7 @@ def add_exercise():
 def update_exercise(id):
 
     # already putting id in the url path; don't need for json body?
-    if not request.json:
+    if not request.json or not validateCategory(request.json['category']):
         abort(400)
     matched_exercise = [e for e in exercises if e['id'] == id]
     
@@ -55,6 +60,15 @@ def delete_exercise(id):
 @exercises_bp.route('/', methods=['GET'])
 def get_all_exercises():
     return jsonify({'exercises':exercises})
+
+@exercises_bp.route('/category', methods=['GET'])
+def get_all_exercises_by_category():
+    ## return a dictionary of exercises grouped by category
+    exercises_by_category_payload = {}
+    for c in category:
+        exercises = [e for e in exercises if e['category'] == c]
+        exercises_by_category_payload[c] = sorted(exercises, key= lambda e: e['name'])
+    return jsonify({'exercises_by_category': exercises_by_category_payload})
 
 @exercises_bp.route('/link', methods=['GET'])
 def get_all_workouts_by_exercise_id():
