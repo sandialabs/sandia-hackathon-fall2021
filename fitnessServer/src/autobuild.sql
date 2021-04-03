@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS Users(
     userStatus INT NOT NULL,
     PRIMARY KEY(id)
 );
+CREATE UNIQUE INDEX username_email
+ON Users(username,email);
 INSERT INTO Users(username, firstName,lastName,email,password,userStatus)
 VALUES ('root', 'Administrator','Account','god@google.com','abc123',0);
 INSERT INTO Users(username, firstName,lastName,email,password,userStatus)
