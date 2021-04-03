@@ -9,7 +9,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/api/v1/user')
 
 
 def convertUserToJSON(userTuple):
-    return user = {
+    return {
         'id': userTuple[0],
         'username': userTuple[1],
         'password': userTuple[2],
@@ -24,10 +24,10 @@ def convertUserToJSON(userTuple):
 
 @user_bp.route('/<int:id>', methods=['GET'])
 def lookup_user(id):
-    user = [u for u in users if u['id'] == id]
-    if len(user) == 0:
+    user = db_lookup_user(id)
+    if not user:
         abort(404)
-    return jsonify({'user': user[0]})
+    return jsonify({'user': convertUserToJSON(user)})
 
 
 @user_bp.route('/', methods=['POST'])

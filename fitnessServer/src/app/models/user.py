@@ -27,8 +27,8 @@ def db_lookup_user(id):
     return get_data(query)
 
 def db_lookup_user_by_name(username):
-query=f"SELECT id, username, password, email, userStatus from Users where username={username};"
-return get_data(query)
+    query=f"SELECT id, username, password, email, userStatus from Users where username={username};"
+    return get_data(query)
 
 # DO WE NEED??
 def db_update_user(id,username, password, firstName, lastName, email, userStatus):
