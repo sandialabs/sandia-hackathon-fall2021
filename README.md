@@ -14,10 +14,10 @@
 }
 ```
 - To run SQL autobuild, run the following command in the project directory. Doing so will create the default database, all the tables, and prepopulate the tables with test data.
-...
+```
 mysql -u [username] -p[passwordhere] < fitnessServer/autobuild.sql
-...
+```
 - To drop all tables, run:
-...
+```
 mysql -u [username] -p[passwordhere] < fitnessServer/cleanup.sql
-...
+```
