@@ -1,81 +1,95 @@
-
-
 from ..models.test import exercises, workouts
-from flask import Blueprint, jsonify, make_response, abort ,request
+from ..models.workouts import *
+from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
 
 
 workouts_bp = Blueprint('workout', __name__, url_prefix='/api/v1/workout')
 
 
+def convertWorkoutToDict(workoutTuple):
+    return {
+        'id': workoutTuple[0],
+        'nickname': workoutTuple[1],
+        'ownerId': workoutTuple[2]],
+    }
 
-@workouts_bp.route('/<int:workout_id>', methods=['GET','POST'])
+def convertGoalsToDict(goalsTuple):
+    return {
+        'id': goalsTuple[0],
+        'linkId': goalsTuple[1], 
+        'numReps': goalsTuple[2], 
+        'numSets': goalsTuple[3], 
+        'ownerId': goalsTuple[4], 
+        'weight' : goalsTuple[5], 
+        'duration' : goalsTuple[6]
+    }
+
+
+@ workouts_bp.route('/<int:workout_id>', methods=['GET', 'POST'])
 def lookup_workout(workout_id):
-    workout = [w for w in workouts if w['id'] == workout_id]
+    workout = db_lookup_workout_by_id(workout_id)
     if len(workout) == 0:
         abort(404)
-    return jsonify({'workout':workout[0]})
+    return jsonify({'workout': workout[0]})
 
 
-@workouts_bp.route('/owner/<int:owner_id>', methods=['GET'])
+@ workouts_bp.route('/owner/<int:owner_id>', methods=['GET'])
 def lookup_workout_by_owner(owner_id):
-    owned_workout = [w for w in workouts if w['ownerId'] == owner_id]
+    owned_workouts = db_lookup_workout_by_owner(owner_id)
     if len(owned_workout) == 0:
         abort(404)
-    return jsonify({'workout':owned_workout})
+    formatted_return = [convertWorkoutToDict(w) for w in owned_workouts]
+    return jsonify({'workout': formatted_return})
 
 
-@workouts_bp.route('/', methods=['POST'])
+@ workouts_bp.route('/', methods=['POST'])
 def add_workout():
     if not 'nickname' in request.json and not 'ownerId' in request.json:
         abort(405)
-    new_workout = {
-        'id': workouts[-1]['id']+1,
-        'nickname': request.json['nickname'],
-        'ownerId': request.json['ownerId'],
-    }
-    workouts.append(new_workout)
-    return jsonify({'workout': new_workout}), 201
+    nickname = request.json['nickname'],
+    ownerId = request.json['ownerId'],
+    db_enter_workouts(nickname, ownerId)
+    new_workouts = db_lookup_workout_by_owner_and_name(nickname, owner_id)
+    if len(new_workouts) == 0:
+        abort(405)
+    else:
+        return jsonify({'workout': convertWorkoutToDict(new_workouts[0])}), 201
 
 
-@workouts_bp.route('/<int:workout_id>', methods=['PUT'])
+@ workouts_bp.route('/<int:workout_id>', methods=['PUT'])
 def update_workout(workout_id):
     if not request.json:
         abort(400)
     if not 'nickname' in request.json:
         abort(405)
-    matched_workout = [w for w in workouts if w['id'] == workout_id]
-    
+    matched_workout = db_lookup_workout_by_id(workout_id)
     if len(matched_workout) == 0:
         abort(404)
 
-    # do we want to overwrite every time? currently we do not    
-    matched_workout[0]['nickname'] = request.json.get('nickname', matched_workout[0]['nickname'])
-    return jsonify({'workout': matched_workout[0]}), 200
+    # do we want to overwrite every time? currently we do not
+    nickname = request.json.get('nickname', matched_workout[0][1])
+    db_update_workout(matched_workout[0][0], nickname)
+    updated_workout = db_lookup_workout_by_id(matched_workout[0][0])
+    if len(updated_workout) == 0:
+        abort(405)
+    return jsonify({'workout': updated_workout[0]}), 200
 
 
-@workouts_bp.route('/<int:workout_id>', methods=['DELETE'])
+@ workouts_bp.route('/<int:workout_id>', methods = ['DELETE'])
 def delete_workout(workout_id):
-    found_workout = [w for w in workouts if w['id'] == workout_id]
-    if len(found_workout) == 0:
-        abort(404)
-    workouts.remove(found_workout[0])
+    is_valid = db_lookup_workout_by_id(workout_id)
+    if len(is_valid) == 0:
+        abort(405)
+    db_remove_workouts(workout_id)
+    is_removed = True if len(db_lookup_exercise(id)) != 0 else False
     return jsonify({'result': True})
 
-
-## GOAL SECTION
-
-
-## LINK SECTION
-@workouts_bp.route('/link/<int:workout_id>', methods=['GET'])
+# LINK SECTION
+@ workouts_bp.route('/link/<int:workout_id>', methods = ['GET'])
 def get_goals_by_workout_id(workout_id):
-    # given a workout id, find all related exercises and goals
-    # first get the junction item
-    junctions = [j for j in exercise_workout_link if j[workoutId] == workout_id]
-    # then use the junctions to get the goals
-    if len(junctions) == 0:
-        abort(400)
-    related_goals = [g for g in goals if g[linkId] == junctions[0]]
+    related_goals = db_get_goals_by_workout(workout_id)
     if len(related_goals) == 0:
         abort(404)
-    return jsonify({'exercises':exercises})
+    converted_goals = [convertGoalsToDict(g) for g in related_goals]
+    return jsonify({'goals': converted_goals})

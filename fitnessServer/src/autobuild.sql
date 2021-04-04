@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS Workouts (
     PRIMARY KEY(id),
     FOREIGN KEY(ownerId) REFERENCES Users(id)
 );
+CREATE UNIQUE INDEX workout_nickname_owner
+ON Workouts(nickname, ownerId);
 INSERT INTO Workouts(nickname,ownerId)
 VALUES('Thursday Abs',2);
 INSERT INTO Workouts(nickname,ownerId)

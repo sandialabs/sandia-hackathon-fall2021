@@ -1,5 +1,5 @@
 
-from ..models.test import exercises, category
+from ..models.test import category
 from ..models.exercises import *
 
 from flask import Blueprint, jsonify, make_response, abort ,request
@@ -69,10 +69,10 @@ def update_exercise(id):
 
 @exercises_bp.route('/<int:id>', methods=['DELETE'])
 def delete_exercise(id):
-    found_exercise = [e for e in exercises if e['id'] == id]
-    if len(found_exercise) == 0:
-        abort(404)
-    exercises_bp.remove(found_exercise[0])
+    is_valid = db_lookup_exercise(id)
+    if len(is_valid) == 0:
+        abort(405)
+    db_remove_exercise(id)
     is_removed = True if len(db_lookup_exercise(id)) != 0 else False
     return jsonify({'result': is_removed})
 
