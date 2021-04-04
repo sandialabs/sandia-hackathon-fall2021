@@ -36,9 +36,9 @@ def add_user():
 
         username = request.json['username'],
         password = request.json['password'],
-        firstName = request.json.get('firstName', None),
-        lastName = request.json.get('lastName', None),
-        email = request.json.get('email', None),
+        firstName = request.json.get('firstName', None)
+        lastName = request.json.get('lastName', None)
+        email = request.json.get('email', None)
         # if no user status given, default to active
         userStatus = request.json.get('userStatus', 0)
     db_enter_user(username, password, firstName, lastName, email, userStatus)

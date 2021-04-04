@@ -1,4 +1,3 @@
-from ..models.test import exercises, workouts
 from ..models.workouts import *
 from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
@@ -31,7 +30,7 @@ def lookup_workout(workout_id):
     workout = db_lookup_workout_by_id(workout_id)
     if len(workout) == 0:
         abort(404)
-    return jsonify({'workout': workout[0]})
+    return jsonify({'workout': convertWorkoutToDict(workout[0])})
 
 
 @ workouts_bp.route('/owner/<int:owner_id>', methods=['GET'])
@@ -73,7 +72,7 @@ def update_workout(workout_id):
     updated_workout = db_lookup_workout_by_id(matched_workout[0][0])
     if len(updated_workout) == 0:
         abort(405)
-    return jsonify({'workout': updated_workout[0]}), 200
+    return jsonify({'workout': convertWorkoutToDict(updated_workout[0])}), 200
 
 
 @ workouts_bp.route('/<int:workout_id>', methods = ['DELETE'])
@@ -82,7 +81,7 @@ def delete_workout(workout_id):
     if len(is_valid) == 0:
         abort(405)
     db_remove_workouts(workout_id)
-    is_removed = True if len(db_lookup_exercise(id)) != 0 else False
+    is_removed = True if len(db_lookup_exercise(workout_id)) != 0 else False
     return jsonify({'result': True})
 
 # LINK SECTION
