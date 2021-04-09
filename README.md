@@ -7,7 +7,7 @@ https://www.python.org/downloads/
 # Install flutter   
 https://flutter.dev/docs/get-started/install/windows
 
-#Install Mysql
+# Install Mysql
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 
 # install git 
