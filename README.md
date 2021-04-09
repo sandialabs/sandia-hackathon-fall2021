@@ -1,18 +1,24 @@
-### build the docker image
--  if on the SRN, copy the following into ~/.docker/config.json
-```
-{
- "proxies":
- {
-   "default":
-   {
-     "httpProxy": "http://proxy.sandia.gov:80/",
-     "httpsProxy": "http://proxy.sandia.gov:80/",
-     "noProxy": "localhost,127.0.0.1,gitlab.sandia.gov,cee-gitlab.sandia.gov,*.sandia.gov,sandia.gov,192.168.*, 172.16.*, 10.*"
-   }
- }
-}
-```
+# Install android studio
+https://developer.android.com/studio
+
+# install python 
+https://www.python.org/downloads/
+
+# Install flutter   
+https://flutter.dev/docs/get-started/install/windows
+
+#Install Mysql
+https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+# install git 
+https://git-scm.com/download/win
+
+#install visual code or favorite ide
+https://code.visualstudio.com/
+
+# Clone Project
+.....
+py -m pip install -r requirments.txt
 - To run SQL autobuild, run the following command in the project directory. Doing so will create the default database, all the tables, and prepopulate the tables with test data.
 ```
 mysql -u [username] -p[passwordhere] < fitnessServer/autobuild.sql
