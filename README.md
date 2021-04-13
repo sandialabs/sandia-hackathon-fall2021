@@ -13,7 +13,7 @@ https://dev.mysql.com/downloads/windows/installer/8.0.html
 # install git 
 https://git-scm.com/download/win
 
-#install visual code or favorite ide
+# install visual code or favorite ide
 https://code.visualstudio.com/
 
 # Clone Project
