@@ -39,6 +39,8 @@ integration_test/
 ios/
 android/
 *.iml
+pubspec.lock
+.metadata
 
 # Web related
 lib/generated_plugin_registrant.dart
