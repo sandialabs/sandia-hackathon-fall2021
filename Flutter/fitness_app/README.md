@@ -24,3 +24,21 @@ Before you run the app, navigate to the FLutter Root folder and run
 flutter channel beta
 flutter upgrade
 ```
+
+## Fix app/build.gradle 
+
+```
+android {
+   
+    defaultConfig {
+        ...
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+    ...
+}
+
+dependencies {
+  implementation 'androidx.multidex:multidex:2.0.1'  //with androidx libraries  
+}
+```
