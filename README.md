@@ -17,8 +17,9 @@ https://git-scm.com/download/win
 https://code.visualstudio.com/
 
 # Clone Project
-.....
+```
 py -m pip install -r requirments.txt
+```
 - To run SQL autobuild, run the following command in the project directory. Doing so will create the default database, all the tables, and prepopulate the tables with test data.
 ```
 mysql -u [username] -p[passwordhere] < fitnessServer/autobuild.sql
