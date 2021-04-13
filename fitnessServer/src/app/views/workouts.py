@@ -1,3 +1,6 @@
+# Copyright 2019 National Technology & Engineering Solutions of Sandia, LLC (NTESS). 
+# Under the terms of Contract DE-NA0003525 with NTESS, the U.S. Government retains 
+# certain rights in this software.
 from ..models.workouts import *
 from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
