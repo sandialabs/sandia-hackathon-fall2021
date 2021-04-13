@@ -35,7 +35,7 @@ class Exercises extends StatelessWidget {
 }
 
 Future<Map> loadData() async {
-  final Uri url = Uri.http("localhost:6001", "/api/v1/workout/owner/2");
+  final Uri url = Uri.http("10.0.2.2:6001", "/api/v1/workout/owner/2");
   http.Response response =
       await http.get(url, headers: {"Accept": "application/json"});
   Map data = jsonDecode(response.body);
