@@ -57,7 +57,7 @@ def update_exercise(id):
     if not request.json or not validateCategory(request.json['category']):
         abort(400)
     matched_exercise = db_lookup_exercise(id)
-    if len(matched_exercise) ==:
+    if len(matched_exercise) ==0:
         abort(404)
 
     # do we want to overwrite every time? currently we do not    
