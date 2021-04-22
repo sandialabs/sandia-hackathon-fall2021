@@ -30,7 +30,7 @@ def lookup_user(id):
     user = db_lookup_user(id)
     if not user:
         abort(404)
-    return jsonify({'user': convertUserToDict(user)})
+    return jsonify({'user': convertUserToDict(user[0])})
 
 
 @user_bp.route('/', methods=['POST'])

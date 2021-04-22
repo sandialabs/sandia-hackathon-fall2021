@@ -27,11 +27,11 @@ def db_enter_user(username, password, firstName, lastName, email, userStatus=0):
     return
 
 def db_lookup_user(id):
-    query=f"SELECT id, username, password, email, userStatus from Users where id={id};"
+    query=f"SELECT id, username, password, firstName, lastName, email, userStatus from Users where id={id};"
     return get_data(query)
 
 def db_lookup_user_by_name(username):
-    query=f"SELECT id, username, password, email, userStatus from Users where username=\'{username}\';"
+    query=f"SELECT id, username, password,  firstName, lastName, email, userStatus from Users where username=\'{username}\';"
     return get_data(query)
 
 # DO WE NEED??
