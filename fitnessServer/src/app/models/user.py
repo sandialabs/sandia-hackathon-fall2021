@@ -3,7 +3,7 @@
 # certain rights in this software.
 
 from flask_login import UserMixin
-from . import login_manager,db
+from . import db
 
 class User(UserMixin):
     pass

@@ -2,7 +2,7 @@
 # Under the terms of Contract DE-NA0003525 with NTESS, the U.S. Government retains 
 # certain rights in this software.
 
-from . import login_manager,db
+from . import db
 
 def get_data(query):
     cursor=db.connection.cursor()
