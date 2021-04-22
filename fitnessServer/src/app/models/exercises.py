@@ -22,7 +22,7 @@ def insert_or_set_data(query):
 
 def db_enter_exercise(name, description, impact, intensity, category):
     # TODO: ensure name unique
-    query = f'INSERT INTO Exercises (name, description, impact, intensity, category) VALUES ({name},{description},{impact},{intensity},{category});'
+    query = f'INSERT INTO Exercises (name, description, impact, intensity, category) VALUES (\'{name}\',\'{description}\',\'{impact}\',\'{intensity}\',\'{category}\');'
     insert_or_set_data(query)
     return
 
@@ -33,7 +33,7 @@ def db_lookup_exercise(id):
 
 
 def db_lookup_exercise_by_name(name):
-    query = f"SELECT id, name, description, impact, intensity, category from Exercises where name={name};"
+    query = f"SELECT id, name, description, impact, intensity, category from Exercises where name=\'{name}\';"
     return get_data(query)
 
 def db_lookup_all_exercises():

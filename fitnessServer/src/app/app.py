@@ -18,10 +18,10 @@ def create_app():
     app = Flask(__name__, instance_relative_config=True)
 #     app.secret_key = 'super secret string' 
 #     login_manager.init_app(app)
-    app.config['MYSQL_DATABASE_USER'] = 'root'
-    app.config['MYSQL_DATABASE_PASSWORD'] = 'CHANGEME'
-    app.config['MYSQL_DATABASE_DB'] = 'fitnessDemo'
-    app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = 'CHANGEME'
+    app.config['MYSQL_DB'] = 'fitnessDemo'
+    app.config['MYSQL_HOST'] = 'localhost'
     from .models import db
     db.init_app(app)
 

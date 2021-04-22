@@ -38,8 +38,8 @@ def add_user():
     if not request.json or (not 'username' in request.json and not 'password' in request.json):
         abort(405)
 
-        username = request.json['username'],
-        password = request.json['password'],
+        username = request.json['username']
+        password = request.json['password']
         firstName = request.json.get('firstName', None)
         lastName = request.json.get('lastName', None)
         email = request.json.get('email', None)
