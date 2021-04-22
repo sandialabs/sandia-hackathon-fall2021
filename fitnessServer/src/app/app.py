@@ -8,10 +8,8 @@ from .views.users import user_bp
 from .views.workouts import workouts_bp
 from .views.exercises import exercises_bp
 from .views.etc import test_bp, err_bp
-from flask_mysqldb import MySQL
 from flask_login import LoginManager
 #from config import config
-db=MySQL()
 
 # login_manager=LoginManager()
 
@@ -20,10 +18,12 @@ def create_app():
     app = Flask(__name__, instance_relative_config=True)
 #     app.secret_key = 'super secret string' 
 #     login_manager.init_app(app)
-#     app.config['MYSQL_HOST']=os.environ.get('HOST')
-#     app.config['MYSQL_USER']=os.environ.get('USER')
-#     app.config['MYSQL_PASSWORD']=os.environ.get('PASSWORD')
-#     app.config['MYSQL_gitDB']=os.environ.get('DATABASE')
+    app.config['MYSQL_DATABASE_USER'] = 'root'
+    app.config['MYSQL_DATABASE_PASSWORD'] = 'CHANGEME'
+    app.config['MYSQL_DATABASE_DB'] = 'fitnessDemo'
+    app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+    from .models import db
+    db.init_app(app)
 
     # REgister Bps
     app.register_blueprint(user_bp)

@@ -13,7 +13,7 @@ def convertWorkoutToDict(workoutTuple):
     return {
         'id': workoutTuple[0],
         'nickname': workoutTuple[1],
-        'ownerId': workoutTuple[2]],
+        'ownerId': workoutTuple[2],
     }
 
 def convertGoalsToDict(goalsTuple):

@@ -21,9 +21,9 @@ def convertExerciseToDict(exerciseTuple):
     return {
         'id': exerciseTuple[0],
         'name': exerciseTuple[1],
-        'description': exerciseTuple[2]],
-        'impact': exerciseTuple[3]],
-        'intensity': exerciseTuple[4]],
+        'description': exerciseTuple[2],
+        'impact': exerciseTuple[3],
+        'intensity': exerciseTuple[4],
         'category': exerciseTuple[5]
     }
 
@@ -32,7 +32,7 @@ def convertWorkoutToDict(workoutTuple):
     return {
         'id': workoutTuple[0],
         'nickname': workoutTuple[1],
-        'ownerId': workoutTuple[2]],
+        'ownerId': workoutTuple[2],
     }
 
 @exercises_bp.route('/', methods=['POST'])
