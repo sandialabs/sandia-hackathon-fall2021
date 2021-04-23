@@ -49,10 +49,10 @@ def lookup_workout_by_owner(owner_id):
 def add_workout():
     if not 'nickname' in request.json and not 'ownerId' in request.json:
         abort(405)
-    nickname = request.json['nickname'],
-    ownerId = request.json['ownerId'],
+    nickname = request.json['nickname']
+    ownerId = request.json['ownerId']
     db_enter_workouts(nickname, ownerId)
-    new_workouts = db_lookup_workout_by_owner_and_name(nickname, owner_id)
+    new_workouts = db_lookup_workout_by_owner_and_name(nickname, ownerId)
     if len(new_workouts) == 0:
         abort(405)
     else:

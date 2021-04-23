@@ -21,7 +21,7 @@ def insert_or_set_data(query):
 
 
 def db_enter_workouts(nickname, ownerId):
-    query = f'INSERT INTO Workouts (nickname, ownerId) VALUES ({nickname}, {ownerId});'
+    query = f'INSERT INTO Workouts (nickname, ownerId) VALUES (\'{nickname}\', {ownerId});'
     insert_or_set_data(query)
     return
 
@@ -32,7 +32,7 @@ def db_lookup_workout_by_id(id):
 
 
 def db_lookup_workout_by_name(name):
-    query = f"SELECT id, nickname, ownerId from Workouts where nickname={name};"
+    query = f"SELECT id, nickname, ownerId from Workouts where nickname=\'{name}\';"
     return get_data(query)
 
 
@@ -42,12 +42,12 @@ def db_lookup_workout_by_owner(ownerId):
 
 
 def db_lookup_workout_by_owner_and_name(nickname, ownerId):
-    query = f"SELECT id, nickname, ownerId from Workouts where ownerId={ownerId} and nickname={nickname};"
+    query = f"SELECT id, nickname, ownerId from Workouts where ownerId={ownerId} and nickname=\'{nickname}\';"
     return get_data(query)
 
 
 def db_update_workout(id, nickname):
-    query = f"UPDATE Workouts SET nickname={nickname} WHERE id={id};"
+    query = f"UPDATE Workouts SET nickname=\'{nickname}\' WHERE id={id};"
     insert_or_set_data(query)
 
 
