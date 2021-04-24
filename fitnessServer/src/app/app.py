@@ -19,7 +19,7 @@ def create_app():
 #     app.secret_key = 'super secret string' 
 #     login_manager.init_app(app)
     app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'CHANGEME'
+    app.config['MYSQL_PASSWORD'] = 'norfolk2021'
     app.config['MYSQL_DB'] = 'fitnessDemo'
     app.config['MYSQL_HOST'] = 'localhost'
     from .models import db

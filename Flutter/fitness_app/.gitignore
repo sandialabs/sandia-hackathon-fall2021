@@ -8,8 +8,8 @@
 .buildlog/
 .history
 .svn/
-
-
+*.png
+*.jpg
 # IntelliJ related
 *.iml
 *.ipr

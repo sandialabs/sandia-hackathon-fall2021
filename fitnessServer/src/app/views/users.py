@@ -8,7 +8,7 @@ from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
 
 
-user_bp = Blueprint('user', __name__, url_prefix='FIND ME IN THE YAML FILE!')
+user_bp = Blueprint('user', __name__, url_prefix='/api/v1/user')
 
 
 def convertUserToDict(userTuple):
@@ -25,14 +25,6 @@ def convertUserToDict(userTuple):
 # USER INFORMATION SECTION
 
 
-<<<<<<< HEAD
-@user_bp.route('WHERE AM I GOING?', methods=[WHATAMIDOINGTELLMEPLEASE])
-## fill in a method to return something here or face the wrath of the front end!
-## but also please have mercy on the database and remember users could pass you
-## garbage and the database doesn't like garbage it's just a database
-def methodName():
-    return
-=======
 @user_bp.route('/<int:id>', methods=['GET'])
 def lookup_user(id):
     user = db_lookup_user(id)
@@ -43,16 +35,17 @@ def lookup_user(id):
 
 @user_bp.route('/', methods=['POST'])
 def add_user():
+    print(request.json)
     if not request.json or (not 'username' in request.json and not 'password' in request.json):
         abort(405)
 
-        username = request.json['username']
-        password = request.json['password']
-        firstName = request.json.get('firstName', None)
-        lastName = request.json.get('lastName', None)
-        email = request.json.get('email', None)
-        # if no user status given, default to active
-        userStatus = request.json.get('userStatus', 0)
+    username = request.json['username']
+    password = request.json['password']
+    firstName = request.json.get('firstName', None)
+    lastName = request.json.get('lastName', None)
+    email = request.json.get('email', None)
+    # if no user status given, default to active
+    userStatus = request.json.get('userStatus', 0)
     db_enter_user(username, password, firstName, lastName, email, userStatus)
     created_user = db_lookup_user_by_name(username)
     if len(created_user) != 0:
@@ -96,7 +89,7 @@ def delete_user(user_id):
     return jsonify({'result': is_removed})
 
 
-@user_bp.route('/login', methods=['GET'])
+@user_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if not request.json:
         abort(400)
@@ -105,8 +98,8 @@ def login():
     matched_user = db_lookup_user_by_name(request.json['username'])
     if len(matched_user) == 0:
         abort(400)
-    if matched_user[0][3] == request.json['password']:
-        return jsonify({'result': True})
+    print(matched_user)
+    if matched_user[0][2] == request.json['password']:
+        return jsonify({'result': True, 'id' : matched_user[0][0]})
     else:
         return jsonify({'result': False})
->>>>>>> e9bc1b25e4ea90ce16ed510b344afd3bf46070b6

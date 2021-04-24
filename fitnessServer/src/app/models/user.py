@@ -21,11 +21,8 @@ def insert_or_set_data(query):
     db.connection.commit()
     cursor.close()
 
-<<<<<<< HEAD
-## data access to the database needs to be filled in here!
-=======
 def db_enter_user(username, password, firstName, lastName, email, userStatus=0):
-    query=f'INSERT INTO Users(username,password,firstName, lastName, email, userStatus) VALUES(\'{username}\',\'{password}\',\'{firstName}\',\'{lastName}\',\'{email}\', {userStatus}));'
+    query=f'INSERT INTO Users(username,password,firstName, lastName, email, userStatus) VALUES(\'{username}\',\'{password}\',\'{firstName}\',\'{lastName}\',\'{email}\', {userStatus});'
     insert_or_set_data(query)
     return
 
@@ -46,4 +43,3 @@ def db_remove_user(id):
     query=f'DELETE FROM Users WHERE id={id};'
     insert_or_set_data(query)
     
->>>>>>> e9bc1b25e4ea90ce16ed510b344afd3bf46070b6

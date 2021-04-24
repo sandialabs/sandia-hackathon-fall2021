@@ -3,9 +3,9 @@
    certain rights in this software.
 */
 
-
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import '../globals.dart' as global;
 
 class Exercises extends StatelessWidget {
   @override
@@ -31,12 +31,13 @@ class Exercises extends StatelessWidget {
                 SizedBox(
                     height: 150.0,
                     child: GestureDetector(
-                        onTap: () {
-                          log("TEST");
-                        },
-                        child: Image.asset('assets/muscle.jpg',
-                            fit: BoxFit.contain))),
-                Text("Weight Lifting",
+                      onTap: () {
+                        log("TEST");
+                      },
+                      /*child: Image.asset('assets/muscle.jpg',
+                            fit: BoxFit.contain)*/
+                    )),
+                Text("Strength",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
@@ -45,12 +46,13 @@ class Exercises extends StatelessWidget {
                 SizedBox(
                     height: 150.0,
                     child: GestureDetector(
-                        onTap: () {
-                          log("TEST");
-                        },
-                        child: Image.asset('assets/stretch.png',
-                            fit: BoxFit.contain))),
-                Text("Stretches",
+                      onTap: () {
+                        log("TEST");
+                      },
+                      /*child: Image.asset('assets/stretch.png',
+                            fit: BoxFit.contain)*/
+                    )),
+                Text("Flexibility",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
@@ -59,12 +61,13 @@ class Exercises extends StatelessWidget {
                 SizedBox(
                     height: 150.0,
                     child: GestureDetector(
-                        onTap: () {
-                          log("TEST");
-                        },
-                        child: Image.asset('assets/cardio.jpg',
-                            fit: BoxFit.contain))),
-                Text("Cardio",
+                      onTap: () {
+                        log("TEST");
+                      },
+                      /*child: Image.asset('assets/cardio.jpg',
+                            fit: BoxFit.contain)*/
+                    )),
+                Text("Endurance",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(

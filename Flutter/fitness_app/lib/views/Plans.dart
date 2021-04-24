@@ -6,8 +6,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../globals.dart' as global;
 
-class Exercises extends StatelessWidget {
+class Plans extends StatelessWidget {
   @override
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
@@ -25,6 +26,7 @@ class Exercises extends StatelessWidget {
                 SizedBox(
                   height: 15.0,
                 ),
+                Text("My Workout Plans")
               ],
             ),
           ),
@@ -35,7 +37,8 @@ class Exercises extends StatelessWidget {
 }
 
 Future<Map> loadData() async {
-  final Uri url = Uri.http("10.0.2.2:6001", "/api/v1/workout/owner/2");
+  final Uri url = Uri.http(
+      "10.0.2.2:6001", "/api/v1/workout/owner/" + global.userId.toString());
   http.Response response =
       await http.get(url, headers: {"Accept": "application/json"});
   Map data = jsonDecode(response.body);
