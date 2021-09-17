@@ -4,8 +4,9 @@ https://developer.android.com/studio
 # install python 
 https://www.python.org/downloads/
 
-# Install flutter   
+# Install flutter for your platform  
 https://flutter.dev/docs/get-started/install/windows
+https://flutter.dev/docs/get-started/install/macos
 
 # Install Mysql
 https://dev.mysql.com/downloads/windows/installer/8.0.html
