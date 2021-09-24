@@ -25,12 +25,13 @@ py -m pip install -r requirments.txt
 # windows
 mysqlsh --password <password> --uri=root@localhost  -f fitnessServer/autobuild.sql
 # mac/linux
-mysql -u [username] -p[passwordhere] < fitnessServer/autobuild.sql
+mysql -u [username] -p < fitnessServer/autobuild.sql
+(or try 'sudo mysql -u [username] -p < fitnessServer/autobuild.sql')
 ```
 - To drop all tables, run:
 ```
 # windows 
 mysqlsh --password <password> --uri=root@localhost  -f fitnessServer/cleanup.sql
 # mac/linux 
-mysql -u [username] -p[passwordhere] < fitnessServer/cleanup.sql
+mysql -u [username] -p < fitnessServer/cleanup.sql
 ```
