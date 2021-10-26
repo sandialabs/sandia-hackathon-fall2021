@@ -15,7 +15,7 @@ Jinja2
 lazy-object-proxy
 MarkupSafe
 mccabe
-mysqlclient
+mysqlclient==1.3.12
 pluggy
 py
 pylint
