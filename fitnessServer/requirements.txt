@@ -7,6 +7,8 @@ coverage
 Flask
 Flask-SQLAlchemy
 Flask-WTF
+flask_mysqldb
+flask_login
 gunicorn
 idna
 isort
