@@ -6,34 +6,13 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../globals.dart' as global;
-import 'add_exercise.dart';
+import 'exercises.dart';
 
-class Exercises extends StatelessWidget {
+class Navigation extends StatelessWidget {
   @override
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   Widget build(BuildContext context) {
-    final addButton = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0x0000ff),
-      child: MaterialButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return AddState();
-                },
-              ),
-            );
-          },
-          child: Text(
-            "Add Exercise",
-            textAlign: TextAlign.center,
-          )),
-    );
-
     return Scaffold(
       body: Center(
         child: Container(
@@ -44,7 +23,7 @@ class Exercises extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Exercises",
+                Text("My Fitness App",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
@@ -55,11 +34,18 @@ class Exercises extends StatelessWidget {
                     height: 150.0,
                     child: GestureDetector(
                         onTap: () {
-                          log("TEST");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Exercises();
+                              },
+                            ),
+                          );
                         },
                         child: Image.asset('assets/muscle.jpg',
                             fit: BoxFit.contain))),
-                Text("Strength",
+                Text("Exercises",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(
@@ -73,27 +59,9 @@ class Exercises extends StatelessWidget {
                         },
                         child: Image.asset('assets/stretch.jpg',
                             fit: BoxFit.contain))),
-                Text("Flexibility",
+                Text("My workouts",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 50.0,
-                ),
-                SizedBox(
-                    height: 150.0,
-                    child: GestureDetector(
-                        onTap: () {
-                          log("TEST");
-                        },
-                        child: Image.asset('assets/cardio.png',
-                            fit: BoxFit.contain))),
-                Text("Endurance",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 15.0,
-                ),
-                addButton
               ],
             ),
           ),

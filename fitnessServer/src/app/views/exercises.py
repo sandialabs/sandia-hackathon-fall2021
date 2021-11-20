@@ -47,7 +47,7 @@ def add_exercise():
     db_enter_exercise(name,description,impact,intensity,category)
     new_exercise = db_lookup_exercise_by_name(name)
     if new_exercise:
-        return jsonify({'exercise': convertExerciseToDict(new_exercise)}), 201
+        return jsonify({'exercise': convertExerciseToDict(new_exercise[0])}), 201
     else:
         abort(405)
 

@@ -4,6 +4,7 @@
 
 #!flask/bin/python
 from flask import Flask, jsonify, make_response, request, abort
+from flask_cors import CORS
 from .views.users import user_bp
 from .views.workouts import workouts_bp
 from .views.exercises import exercises_bp
@@ -16,10 +17,11 @@ from flask_login import LoginManager
 def create_app():
      # Create Flask appliaction
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
 #     app.secret_key = 'super secret string' 
 #     login_manager.init_app(app)
     app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'norfolk2021'
+    app.config['MYSQL_PASSWORD'] = 'nsu2021'
     app.config['MYSQL_DB'] = 'fitnessDemo'
     app.config['MYSQL_HOST'] = 'localhost'
     from .models import db
