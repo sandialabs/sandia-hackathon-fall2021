@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'signup.dart';
 import 'exercises.dart';
 import 'dart:developer';
+import 'navigation.dart';
 import 'Plans.dart';
 import '../globals.dart' as global;
 
@@ -84,10 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 SizedBox(
                   height: 155.0,
-                  //child: Image.asset(
-                  //"assets/logo.png",
-                  //fit: BoxFit.contain,
-                  //),
+                  child: Image.asset(
+                    "assets/logo.png",
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 SizedBox(height: 20.0),
                 emailField,
@@ -131,7 +132,10 @@ getLogin(BuildContext context) async {
   log(url.toString());
   http
       .post(url,
-          headers: {"Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
           body: jsonEncode(queryParameters))
       .then((response) {
     global.userId = json.decode(response.body)['id'];
@@ -142,7 +146,7 @@ getLogin(BuildContext context) async {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return Exercises();
+              return Navigation();
             },
           ),
         );
