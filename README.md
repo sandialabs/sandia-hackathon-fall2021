@@ -34,9 +34,9 @@ cd sandia-hackathon-fall2021
 - To run SQL autobuild, run the following command in the project directory. Doing so will create the default database, all the tables, and prepopulate the tables with test data.
 ```
 # windows
-mysqlsh --password <password> --uri=root@localhost  -f Server/autobuild.sql
+mysqlsh --password <password> --uri=root@localhost  -f Server/src/autobuild.sql
 # mac/linux
-mysql -u [username] -p < fitnessServer/autobuild.sql
+mysql -u [username] -p < Server/src/autobuild.sql
 ```
 
 ## Setup Server
