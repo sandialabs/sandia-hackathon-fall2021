@@ -1,7 +1,7 @@
 # install python 
 https://www.python.org/downloads/
 
-# Install Mysql
+# install Mysql
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 
 # install git 
@@ -9,6 +9,13 @@ https://git-scm.com/download/win
 
 # install visual code or favorite ide
 https://code.visualstudio.com/
+
+# install NodeJS runtime environment
+https://nodejs.org/en/download
+
+# install Angular CLI
+After installing NodeJS, open a terminal and run the following command: 
+```npm install -g @angular/cli```
 
 # Clone Project
 ```
