@@ -1,0 +1,16 @@
+<div class="header">
+    <!-- <div [ngSwitch]="role">
+        <span class="titulo" *ngSwitchCase="'ROLE_ADMIN'"> Bienvenido Administrador</span>
+        <span class="titulo" *ngSwitchCase="'ROLE_COOR'"> Bienvenido Coordinador</span>
+        <span class="titulo" *ngSwitchCase="'ROLE_BIBL'"> Bienvenido Bibliotecario</span>
+    </div> -->
+    
+    <span *ngIf="isLoggedIn()" class="headerLink" routerLink="/workouts">Your Workouts</span>
+    <span *ngIf="isLoggedIn()" class="headerLink" routerLink="/exercises">List of Exercises</span>
+    <span  *ngIf="!isLoggedIn()" class="headerLink" routerLink="/login">Login</span>
+    <span *ngIf="isLoggedIn()" class="headerLink" (click)="logout()">Logout</span>
+    <!-- <span *ngIf="role == 'ROLE_ADMIN'" class="headerLink" routerLink="/admin">Admin</span>
+    <span class="headerLink" routerLink="/estudiantes">Estudiantes</span>
+    <span class="headerLink" routerLink="/materias">Materias</span>
+    <span class="headerLink" routerLink="/libros">Libros</span> -->
+</div>
