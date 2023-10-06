@@ -1,19 +1,21 @@
 # Pre-Requisites
 Install the following tools in order to start the programming challenge
 
-## install python 
+## Install Python 
 https://www.python.org/downloads/
 
-## install Mysql
+## Install Mysql
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 
-## install git 
+- When Installing MySQL, ensure that you setup a legacy password and set it to `NSU2023Hack!`
+
+## Install Git 
 https://git-scm.com/download/win
 
-## install visual code or favorite ide
+## Install Visual Studio code or favorite ide
 https://code.visualstudio.com/
 
-## install NodeJS runtime environment
+## Install NodeJS runtime environment
 https://nodejs.org/en/download
 
 # Setup
@@ -44,7 +46,7 @@ py -m pip install -r Server/requirements.txt
 ```
 - In order to run the Flask server, open another terminal window. If you need to terminate the server at any time, Ctrl+C will shut it down. 
 ```
-cd Server/src
+cd sandia-hackathon-fall2021/Server/src
 flask run
 ```
 
@@ -57,7 +59,7 @@ npm install -g @angular/cli
 
 After installation, we need to navigate to the Angular App Source code and install all dependencies
 ```
-cd FitnessApp/src/app
+cd sandia-hackathon-fall2021/FitnessApp/src/app
 npm install
 ```
 After the dependencies are done installing, we can now build our Angular App
