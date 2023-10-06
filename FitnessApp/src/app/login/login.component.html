@@ -1,0 +1,18 @@
+<div class="container">
+    
+  <h1>Login Page</h1>
+  <form (ngSubmit)="autenticar()" ngNativeValidate>
+    <label for="usrname">Username</label>
+    <input type="text" id="usrname" name="usrname" required [(ngModel)]="login.username">
+
+    <label for="psw">Password</label>
+      <input type="password" id="psw" name="psw" [(ngModel)]="login.password"
+      title="Por Favor pon una Contrasena" required>
+
+    <input type="submit" value="Submit">
+  </form>
+  <div *ngIf="invalido">
+    <p class="invalid">The Username or Password is incorrect</p>
+  </div>
+  <p>Don't have an account? <a href="/register">Register Here!</a></p>
+</div>

@@ -1,12 +1,5 @@
-# Install android studio
-https://developer.android.com/studio
-
 # install python 
 https://www.python.org/downloads/
-
-# Install flutter for your platform  
-https://flutter.dev/docs/get-started/install/windows
-https://flutter.dev/docs/get-started/install/macos
 
 # Install Mysql
 https://dev.mysql.com/downloads/windows/installer/8.0.html
@@ -19,7 +12,7 @@ https://code.visualstudio.com/
 
 # Clone Project
 ```
-py -m pip install -r requirments.txt
+py -m pip install -r requirements.txt
 ```
 
 - In order to run the Flask server, open another terminal window. If you need to terminate the server at any time, Ctrl+C will shut it down. 

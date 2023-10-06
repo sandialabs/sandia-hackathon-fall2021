@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Registration Page</h1>
+    <form (ngSubmit)="register()" ngNativeValidate>
+        <label for="usrname">Username</label>
+        <input type="text" id="usrname" name="usrname" required [(ngModel)]="newUser.username">
+
+        <label for="firstNamw">First Name</label>
+        <input type="text" id="firstName" name="firstName" required [(ngModel)]="newUser.firstName">
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required [(ngModel)]="newUser.lastName">
+
+        <label for="email">E-mail</label>
+        <input type="text" id="email" name="email" required [(ngModel)]="newUser.email">
+          
+      <label for="psw">Password</label>
+       <input type="password" id="psw" name="psw" [(ngModel)]="newUser.password"
+       title="Por Favor pon una Contrasena" required>
+  
+      <input type="submit" value="Submit">
+    </form>
+    <p>Already have an account? <a href="/login">Login Here!</a></p>
+    <div *ngIf="invalido">
+      <p class="invalid">El usuario o la contrasena esta incorrecta</p>
+    </div>
+  </div>
