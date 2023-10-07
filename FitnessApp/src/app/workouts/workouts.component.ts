@@ -15,11 +15,23 @@ export class WorkoutsComponent implements OnInit {
   newWorkout: Workout = new Workout();
   listOfWorkouts: any
   ngOnInit(): void {
+    this.listOfWorkouts = [
+      {
+          "id": 1,
+          "nickname": "Thursday Abs",
+          "ownerId": 2
+      },
+      {
+          "id": 2,
+          "nickname": "MondayCardio",
+          "ownerId": 2
+      }
+  ]
     this.newWorkout.ownerId = localStorage.getItem("userId") || ''
-    this.http.get("/api/v1/workout/owner/"+this.newWorkout.ownerId).subscribe((data)=>{
-      this.listOfWorkouts = Object.values(data)[0]
-      console.log(data)
-    })
+    // this.http.get("/api/v1/workout/owner/"+this.newWorkout.ownerId).subscribe((data)=>{
+    //   this.listOfWorkouts = Object.values(data)[0]
+    //   console.log(data)
+    // })
   }
   addNew()
   {
@@ -28,13 +40,14 @@ export class WorkoutsComponent implements OnInit {
   addWorkout()
   {
     this.add = false
-    this.http.post("/api/v1/workout/", this.newWorkout).subscribe((data)=>{
-      this.router.navigate(["/workouts"])
-      console.log(data)
-    },
-    (error)=>{
-      console.log(error)
-    })
+    this.listOfWorkouts.push(this.newWorkout)
+    // this.http.post("/api/v1/workout/", this.newWorkout).subscribe((data)=>{
+    //   this.router.navigate(["/workouts"])
+    //   console.log(data)
+    // },
+    // (error)=>{
+    //   console.log(error)
+    // })
   }
 }
 
