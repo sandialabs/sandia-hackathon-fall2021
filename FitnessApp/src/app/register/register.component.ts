@@ -22,25 +22,27 @@ export class RegisterComponent implements OnInit {
   }
   register()
   {
-    this.invalido = false
-    let body = {
-      "username": this.newUser.username,
-      "password": this.newUser.password,
-      "firstName": this.newUser.firstName,
-      "lastName":  this.newUser.lastName,
-      "email":  this.newUser.email
-    }
-    this.http.post("/api/v1/user/", body).subscribe((data)=>{
-      // localStorage.setItem("username", this.login.username)
-      // localStorage.setItem("password", this.login.password)
+    localStorage.setItem("userId", '2')
+    this.router.navigate(['/workouts'])
+    // this.invalido = false
+    // let body = {
+    //   "username": this.newUser.username,
+    //   "password": this.newUser.password,
+    //   "firstName": this.newUser.firstName,
+    //   "lastName":  this.newUser.lastName,
+    //   "email":  this.newUser.email
+    // }
+    // this.http.post("/api/v1/user/", body).subscribe((data)=>{
+    //   // localStorage.setItem("username", this.login.username)
+    //   // localStorage.setItem("password", this.login.password)
       
-      console.log(data)
+    //   console.log(data)
 
-    },
-    (error)=>{
-      this.invalido = true
-      console.log(error)
-    })
+    // },
+    // (error)=>{
+    //   this.invalido = true
+    //   console.log(error)
+    // })
   }
 
 }

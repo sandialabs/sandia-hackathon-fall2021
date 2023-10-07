@@ -22,27 +22,29 @@ export class LoginComponent {
     }
     autenticar()
     {
-      this.invalido = false
-      let body = {
-        "username": this.login.username,
-        "password": this.login.password
-      }
-      this.http.post("/api/v1/user/login", body).subscribe((data)=>{
-        let val = Object.values(data)[0]
-        if(typeof val === "number")
-        {
-          this.invalido = false
-          localStorage.setItem("userId", val.toString())
-          this.router.navigate(["/workouts"])
-        }
-        else
-          this.invalido = true
-        console.log(val)
+      localStorage.setItem("userId", '2')
+      this.router.navigate(["/workouts"])
+    //   this.invalido = false
+    //   let body = {
+    //     "username": this.login.username,
+    //     "password": this.login.password
+    //   }
+    //   this.http.post("/api/v1/user/login", body).subscribe((data)=>{
+    //     let val = Object.values(data)[0]
+    //     if(typeof val === "number")
+    //     {
+    //       this.invalido = false
+    //       localStorage.setItem("userId", val.toString())
+    //       this.router.navigate(["/workouts"])
+    //     }
+    //     else
+    //       this.invalido = true
+    //     console.log(val)
 
-      },
-      (error)=>{
-        this.invalido = true
-        console.log(error)
-      })
+    //   },
+    //   (error)=>{
+    //     this.invalido = true
+    //     console.log(error)
+    //   })
     }
 }
