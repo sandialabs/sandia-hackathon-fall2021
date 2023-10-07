@@ -72,7 +72,7 @@ The app should now be running on http://localhost:4200
 Here are walkthroughs or links on how to modify the app
 ## How to add an image to your app.
 1. Find an image you want to add
-2. Save it to the `FitnessApp/src/assests` folder.
+2. Save it to the `FitnessApp/src/assests` folder. ![Screenshot](https://github.com/sandialabs/sandia-hackathon-fall2021/blob/master/resources/image2.PNG)
 3. Create an `img` tag in the component in which you wish to add the image to. Set the `src` attribute of that image tag to the relative path of where you saved the image ![Screenshot](https://github.com/sandialabs/sandia-hackathon-fall2021/blob/master/resources/image1.PNG)
 
 ## HTML Documentation
