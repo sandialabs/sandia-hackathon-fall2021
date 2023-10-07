@@ -5,7 +5,7 @@ Install the following tools in order to start the programming challenge
 https://www.python.org/downloads/
 
 ## Install Mysql
-https://dev.mysql.com/downloads/windows/installer/8.0.html
+https://dev.mysql.com/downloads/mysql/
 
 - When Installing MySQL, ensure that you setup a legacy password and set it to `NSU2023Hack!`
 
@@ -67,3 +67,16 @@ After the dependencies are done installing, we can now build our Angular App
 ng serve
 ```
 The app should now be running on http://localhost:4200
+
+# Resources
+Here are walkthroughs or links on how to modify the app
+## How to add an image to your app.
+1. Find an image you want to add
+2. Save it to the `FitnessApp/src/assests` folder.
+3. Create an `img` tag in the component in which you wish to add the image to. Set the `src` attribute of that image tag to the relative path of where you saved the image ![Screenshot](resources/image1.png)
+
+## HTML Documentation
+https://www.w3schools.com/html/html_examples.asp
+## CSS Documentation
+https://welearncode.com/beginners-guide-css/
+## HTTP Request Documentation
