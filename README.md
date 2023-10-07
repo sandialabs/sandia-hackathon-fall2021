@@ -80,4 +80,3 @@ Here are walkthroughs or links on how to modify the app
 https://www.w3schools.com/html/html_examples.asp
 ## CSS Documentation
 https://welearncode.com/beginners-guide-css/
-## HTTP Request Documentation
